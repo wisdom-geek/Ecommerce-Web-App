@@ -28,7 +28,7 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
     slug= models.SlugField(max_length=255, unique=True)
     parent = models.ForeignKey('self',on_delete=models.CASCADE, null=True, blank=True, related_name='subcategories')
-    description = models.TextField(blank=True, name=True)
+    description = models.TextField(blank=True, null=True)
     
     class Meta:
         verbose_name = 'Category'
@@ -47,7 +47,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()    
-    img = models.ImageField(upload_to='products')
+    img = models.ImageField(upload_to='products/')
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -73,12 +73,12 @@ class OrderItem(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(User, related_name="cart", on_delete=models.CASCADE, null=True, blank=True)
     session_id = models.CharField(max_length=100, null=True, blank=True)
-    items = models.ManyToManyField(Product, through="CartItem")
+    items = models.ManyToManyField(Product, through="CartItem",  related_name='carts')
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items" )
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="cart_items" )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveBigIntegerField(default=1)
     
@@ -150,7 +150,7 @@ class Analytics(models.Model):
 class Configuration(models.Model):
     site_name = models.CharField(max_length=255)
     site_description = models.TextField()
-    site_logo = models.ImageField(upload_to="logos")
+    site_logo = models.ImageField(upload_to="logos/")
     
 class Tax(models.Model):
     name = models.CharField(max_length=100)

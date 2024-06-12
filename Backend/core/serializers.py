@@ -7,6 +7,7 @@ from .models import (
 
 class UserSerializer(serializers.ModelSerializer):
     
+    class Meta:
         model = User
         fields = '__all__'
         
@@ -148,5 +149,5 @@ class RefundSerializer(serializers.ModelSerializer):
     order = OrderSerializer(read_only=True)
       
     class Meta:
-        model = CartItem
+        model = Refund
         fields = '__all__'
