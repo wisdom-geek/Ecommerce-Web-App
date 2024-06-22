@@ -20,7 +20,7 @@ class Vendor(models.Model):
     return_policy = models.TextField()
     
     def __str__(self):
-        return self.user
+        return self.user.name
     
     
 
@@ -47,7 +47,8 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()    
-    img = models.ImageField(upload_to='products/')
+    image = models.ImageField(upload_to='products/')
+    is_flash_sale = models.BooleanField(default=False)
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -73,7 +74,7 @@ class OrderItem(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(User, related_name="cart", on_delete=models.CASCADE, null=True, blank=True)
     session_id = models.CharField(max_length=100, null=True, blank=True)
-    items = models.ManyToManyField(Product, through="CartItem",  related_name='carts')
+    item = models.ManyToManyField(Product, through="CartItem",  related_name='carts')
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -146,6 +147,9 @@ class Analytics(models.Model):
     traffic = models.PositiveIntegerField()
     popular_product = models.ManyToManyField(Product, related_name="analytics")
     created_at= models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural = 'Analytics'
     
 class Configuration(models.Model):
     site_name = models.CharField(max_length=255)

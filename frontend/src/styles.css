@@ -1,0 +1,17 @@
+.category-product {
+    background-color: aqua;
+    margin-bottom: 2px;
+    padding: 5px;
+}
+.category-product img{
+    max-width: 300px;   
+    max-height: 80%; 
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.img{
+    max-width: 300px;
+    max-height: 80%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
