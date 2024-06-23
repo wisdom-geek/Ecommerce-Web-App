@@ -1,68 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../styles.css'
+import "../styles.css";
 
 const CategoryProducts = ({ category, products }) => {
   const categoryProducts = products.filter(
     (product) => product.category.id === category.id
-);
+  );
 
   return (
-    <div className="category-product">
-      <h3>{category.name}</h3>
-      <div
-        id={`category-${category.id}`}
-        className="carousel slide"
-        data-ride="carousel"
-      >
-        <div className="carousel-inner">
-          {categoryProducts.map((product, index) => (
-            <div
-              key={product.id}
-              className={`carousel-item ${index === 0 ? "active" : ""}`}
-            >
-              <div className="card">
-                <img src={product.image} alt={product.name} />
-                <div className="card-body">
-                  <h5 className="card-title">{product.name}</h5>
-                  <p className="card-text">{product.description}</p>
-                  <p className="card-text">Price: ${product.price}</p>
-                  <p className="card-text">Stock: {product.stock}</p>
-                  <Link
-                    to={`/products/${product.slug}`}
-                    className="btn btn-primary"
-                  >
-                    View Details
-                  </Link>
-                </div>
-              </div>
+    <div className="category-products">
+      <h3 className="category-name">{category.name}</h3>
+      <div className="product-container">
+        {categoryProducts.map((product) => (
+          <div key={product.id} className="product-card">
+            <img
+              src={product.image}
+              className="card-img-top"
+              alt={product.name}
+            />
+            <div className="card-body">
+              <h5 className="product-name">{product.name}</h5>
+              <p className="product-description">{product.description}</p>
+              <p className="product-price">Price: ${product.price}</p>
+              <p className="product-stock">Stock: {product.stock}</p>
+              <Link
+                to={`/products/${product.slug}`}
+                className="btn btn-primary"
+              >
+                View Details
+              </Link>
             </div>
-          ))}
-        </div>
-        <a
-          className="carousel-control-prev"
-          href={`#category-${category.id}`}
-          role="button"
-          data-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="sr-only">Previous</span>
-        </a>
-        <a
-          className="carousel-control-prev"
-          href={`#category-${category.id}`}
-          role="button"
-          data-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="sr-only">Next</span>
-        </a>
+          </div>
+        ))}
       </div>
     </div>
   );

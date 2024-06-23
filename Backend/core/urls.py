@@ -1,4 +1,5 @@
 from django.urls import path, include 
+from .views import ProductDetailView
 from rest_framework import routers
 from .views import (
     UserViewSet, VendorViewSet, CategoryViewSet, ProductViewSet, OrderViewSet,
@@ -35,6 +36,5 @@ router.register('refunds', RefundViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('api/products/<slug>/', ProductDetailView.as_view(), name='product-detail'),
 ]
-
-

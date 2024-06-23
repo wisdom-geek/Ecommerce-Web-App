@@ -1,17 +1,246 @@
-.category-product {
-    background-color: aqua;
-    margin-bottom: 2px;
-    padding: 5px;
+/* Global style */
+
+a{
+  text-decoration: none;
 }
-.category-product img{
-    max-width: 300px;   
-    max-height: 80%; 
-    object-fit: cover;
-    margin-bottom: 10px;
+
+/* li{
+  list-style-type: none;
+} */
+
+
+/* Home page stylings */
+.home-page{
+  margin: 4%;
 }
-.img{
-    max-width: 300px;
-    max-height: 80%;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
+
+
+/* Navbar stylings */
+
+.navbar-custom {
+  background-color: #28a745;   
+  padding: 1rem; 
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+  color: #fff; 
+}
+
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-nav .nav-link:hover {
+  color: #d4d4d4; 
+}
+
+.btn-outline-success {
+  color: white; 
+  border-color: #d4d4d4; 
+  background-color: transparent; 
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-outline-success:hover {
+  color: #fff; 
+  background-color: #0c8027; 
+  border-color: #d4d4d4; 
+}
+
+.btn-outline-success {
+  padding: 8px 16px; 
+  font-size: 0.9rem; 
+}
+
+/* Category List Styles */
+.category-list h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.category-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.category-list li {
+  margin-bottom: 0.5rem;
+}
+
+.category-list li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.category-list li a:hover {
+  color: #007bff;
+}
+
+/* Product Heading Styles */
+.product-heading {
+  font-size: 50px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.product-heading::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #000;
+}
+
+/* Product Container Styles */
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 -10px;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: rgb(240, 240, 240);
+  border-radius: 20px;
+}
+
+/* Product Card Styles */
+.product-card {
+  flex: 0 0 calc(25% - 20px); 
+  margin: 0 10px 20px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  box-sizing: border-box; 
+  margin-top: 20px;
+}
+
+
+.product-card:hover {
+  transform: translateY(-5px);
+  border-color: seashell;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+
+.card-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.product-description {
+  margin-bottom: 8px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.product-price {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.product-stock {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: #28a745;
+  border: #28a745;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-primary:hover {
+  background-color: #0c8027;
+}
+/* Flash Sale Slider Styles */
+/* .flash-sale-slider {
+  width: 600px;
+  height: 350px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f8ff; 
+  border-radius: 0 20px 0 20px; 
+} */
+
+.flash-sale-slider img {
+  width: 600px;
+  height: 350px;
+  object-fit: contain;
+  border: 3px solid orange;
+  border-radius: 0 20px 0 20px; 
+  background-color: rgb(241, 241, 241);
+
+}
+
+/* Category Product Styles */
+.category-products {
+  margin: 20px;
+}
+
+.category-name {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.related-product-card {
+  flex: 0 0 calc(25% - 20px);
+  margin: 0 10px 20px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.related-product-card:hover {
+  transform: translateY(-5px);
+  border-color: seashell;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.related-product-img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
+
+.related-product-name {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.related-product-price {
+  font-size: 1rem;
+  font-weight: bold;
+}

@@ -6,6 +6,7 @@ import CategoryList from './CategoryList';
 import FlashSaleProducts from './FlashSaleProducts';
 import TopSellingProducts from './TopSellingProducts';
 import CategoryProducts from './CategoryProducts';
+import '../styles.css';
 
 const HomePage = () =>{
     const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const HomePage = () =>{
     const flashSaleProducts = products.filter(product => product.is_flash_sale).slice(0, 5);
 
     return(
-        <>
+        <div className="home-page">
             {/* First row for listing categories and flash sales */}
             <div className="row">
                 <div className="col-md-3">
@@ -40,7 +41,7 @@ const HomePage = () =>{
                     <CategoryProducts category={category} products={products} />
                 </div>
             ))}
-        </>
+        </div>
     );    
 };
 
