@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles.css';
 
 const CartPage = ({ cart, setCart }) => {
+    const navigate = useNavigate();
+
     const handleRemoveFromCart = (itemToRemove) => {
       const updatedCart = cart.filter((item) => item.id !== itemToRemove.id);
       localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -22,6 +24,10 @@ const CartPage = ({ cart, setCart }) => {
   
     const calculateTotal = () => {
       return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    }
+
+    const handleCheckout = () =>{
+        navigate("/checkout")
     }
   
     return (
@@ -44,7 +50,7 @@ const CartPage = ({ cart, setCart }) => {
               {cart.map((item) => (
                 <tr key={item.id} className="cart-row">
                   <td className="cart-cell">
-                    <Link to={`/product/${item.slug}`} className="cart-link">{item.name}</Link>
+                    <Link to={`/products/${item.slug}`} className="cart-link">{item.name}</Link>
                   </td>
                   <td className="cart-cell">${Number(item.price).toFixed(2)}</td>
                   <td className="cart-cell">
@@ -69,7 +75,7 @@ const CartPage = ({ cart, setCart }) => {
         )}
         <div className="totals">
           <h2 className="total-amount">Total: ${calculateTotal().toFixed(2)}</h2>
-          <button className="proceed-btn">Proceed to Checkout</button>
+          <button onClick={handleCheckout} className="proceed-btn">Proceed to Checkout</button>
         </div>
       </>
     );

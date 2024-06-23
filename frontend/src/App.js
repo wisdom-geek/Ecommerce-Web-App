@@ -6,7 +6,7 @@ import ProductDetails from './components/ProductDetails';
 import { useState} from 'react';
 import CategoryPage from './components/CategoryPage';
 import CartPage from './components/CartPage';
-
+import CheckoutPage from './components/CheckoutPage';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,7 +31,8 @@ function App() {
 
   
   return (
-    <div>
+    <div className="app-wrapper">
+      <div className="content-wrapper">
       {/* Navigation bar start */}
       <nav className="navbar navbar-expand-lg navbar-custom">
         <div className="container-fluid">
@@ -104,8 +105,19 @@ function App() {
         <Route exact path="/search" element={<SearchResultPage />} />
         <Route exact path="/categories/:slug" element={<CategoryPage />} />
         <Route exact path="/cart" element={<CartPage cart={cart} setCart={setCart}/>} />
+        <Route exact path="/checkout" element={<CheckoutPage cart={cart} setCart={setCart}/>} />
       </Routes>
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <p>&copy; 2024 My Shop. All rights reserved.</p>
+        </div>
+      </footer>
+
+      </div>
+
     </div>
+   
   );
 }
 
