@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import '../styles.css';
+import '../styles.css'; // Ensure to import the CSS file
 
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
@@ -11,15 +11,15 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProductsDetails = async () => {
+    const fetchProductDetails = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/products/${slug}`);
+        const response = await axios.get(`http://127.0.0.1:8000/api/product-details/${slug}`);
         setProduct(response.data);
       } catch (error) {
         console.error('Error fetching product details: ', error);
       }
     };
-    fetchProductsDetails();
+    fetchProductDetails();
 
     // Fetch cart from local storage
     const cartData = localStorage.getItem("cart");
@@ -47,72 +47,66 @@ const ProductDetails = () => {
   const handleRemoveFromCart = (itemToRemove) => {
     const updatedCart = cart.filter((item) => item.id !== itemToRemove.id);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-    setCart(updatedCart)
-  }
+    setCart(updatedCart);
+  };
 
   if (!product) {
     return <p>Loading product details...</p>;
   }
 
   return (
-    <div className="product-details">
-      {/* Product Image */}
-      <div className="product-image">
-        {/* Wrap the image with the Link component */}
-        <Link to={`/product/${product.slug}`}>
-          <img src={product.image} alt={product.name} />
-        </Link>
-      </div>
-
-      {/* product details */}
-      <div className="details-card">
-        {/* Product Information */}
+    <div className="product-details-container">
+      <div className="product-details-card">
+        <div className="product-image">
+          <Link to={`/products/${product.slug}`} className="product-img-link">
+            <img src={product.image} alt={product.name} className="product-img" />
+          </Link>
+        </div>
         <div className="product-info">
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-          <div>
-            <label htmlFor="quantity">Quantity</label>
+          <div className="product-items">
+          <h2 className="product-name">{product.name}</h2>
+          <p className="product-description">{product.description}</p>
+          <div className="quantity-section">
+            <label htmlFor="quantity" className="quantity-label">Quantity</label>
             <input
               type="number"
               id="quantity"
               min="1"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
+              className="quantity-input"
             />
           </div>
-          {/* Additional product information can be added here */}
-          <button onClick={handleAddToCart}>Add to Cart</button>
-          {cart.some((item) => item.id === product.id) && (
-            <button onClick={() => handleRemoveFromCart(product)}>Remove from Cart</button>
-          )}
+          <div className="button-section">
+            <button onClick={handleAddToCart} className="add-to-cart-btn">Add to Cart</button>
+            {cart.some((item) => item.id === product.id) && (
+              <button onClick={() => handleRemoveFromCart(product)} className="remove-from-cart-btn">Remove from Cart</button>
+            )}
+          </div>
+        </div>
         </div>
       </div>
-
-      {/* Vendor Information */}
       <div className="vendor-info">
-        <h3>Vendor Information</h3>
-        <p>Vendor: <Link to={`/vendor/${product.vendor?.id}`}>{product.vendor?.name || 'Unknown Vendor'}</Link></p>
-        <p>Contact: {product.vendor?.contact_details || 'N/A'}</p>
+        <h3 className="vendor-info-title">Vendor Information</h3>
+        <p className="vendor-info-details">Vendor: <Link to={`/vendor/${product.vendor?.id}`} className="vendor-link">{product.vendor?.name || 'Unknown Vendor'}</Link></p>
+        <p className="vendor-info-details">Contact: {product.vendor?.contact_details || 'N/A'}</p>
       </div>
-      {/* Shipping information */}
       <div className="shipping-info">
-        <h3>Shipping Information</h3>
-        <p>Shipping Policy: <a href={product.vendor?.shipping_policy} target="_blank" rel="noopener noreferrer">{product.vendor?.shipping_policy ? 'Click Here' : 'N/A'}</a> for shipping policy</p>
-        <p>Return Policy: <a href={product.vendor?.return_policy} target="_blank" rel="noopener noreferrer">{product.vendor?.return_policy ? 'Click Here' : 'N/A'}</a> for return policy</p>
+        <h3 className="shipping-info-title">Shipping Information</h3>
+        <p className="shipping-policy">{`Shipping Policy: `}<a href={product.vendor?.shipping_policy} target="_blank" rel="noopener noreferrer" className="shipping-policy-link">{product.vendor?.shipping_policy ? 'Click Here' : 'N/A'}</a> for shipping policy</p>
+        <p className="return-policy">{`Return Policy: `}<a href={product.vendor?.return_policy} target="_blank" rel="noopener noreferrer" className="return-policy-link">{product.vendor?.return_policy ? 'Click Here' : 'N/A'}</a> for return policy</p>
       </div>
-
-      {/* Reviews */}
       <div className="reviews">
-        <h3>Customer Reviews</h3>
+        <h3 className="reviews-title">Customer Reviews</h3>
         {(product.reviews && product.reviews.length > 0) ? (
           product.reviews.map(review => (
-            <div key={review.id}>
-              <p>Rating: {review.rating}</p>
-              <p>Comment: {review.comment}</p>
+            <div key={review.id} className="review-item">
+              <p className="review-rating">Rating: {review.rating}</p>
+              <p className="review-comment">Comment: {review.comment}</p>
             </div>
           ))
         ) : (
-          <p>No reviews yet.</p>
+          <p className="no-reviews-msg">No reviews yet.</p>
         )}
       </div>
     </div>

@@ -34,15 +34,10 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     
-class ProductDetailView(APIView):
-    def get(self, request, slug):
-        try:
-            product = Product.objects.get(slug=slug)
-        except Product.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        
-        serializer = ProductSerializer(product)
-        return Response(serializer.data)
+class ProductDetailsViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'slug'
     
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()

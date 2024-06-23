@@ -39,7 +39,7 @@ const CategoryPage = () => {
               <p className="product-description">{product.description}</p>
               <p className="product-price">Price: ${product.price}</p>
               <p className="product-stock">Stock: {product.stock} remaining</p>
-              <Link to={`/product/${product.slug}`} className="btn btn-primary">View Details</Link>
+              <Link to={`/products/${product.slug}`} className="btn btn-primary">View Details</Link>
             </div>
           </div>
         ))}

@@ -1,12 +1,11 @@
 from django.urls import path, include 
-from .views import ProductDetailView
 from rest_framework import routers
 from .views import (
     UserViewSet, VendorViewSet, CategoryViewSet, ProductViewSet, OrderViewSet,
     OrderItemViewSet, CartViewSet, CartItemViewSet, ShippingViewSet, PaymentViewSet,
     CouponViewSet, ReviewViewSet, WishlistViewSet, NotificationViewSet, BlogViewSet, 
     ContactViewSet, FAQViewSet, AnalyticsViewSet, ConfigurationViewSet, TaxViewSet, 
-    SubscriptionViewSet, RefundViewSet
+    SubscriptionViewSet, RefundViewSet, ProductDetailsViewSet
 )
 
 router = routers.DefaultRouter()
@@ -14,7 +13,8 @@ router = routers.DefaultRouter()
 router.register('users', UserViewSet)
 router.register('vendor', VendorViewSet)
 router.register('categories', CategoryViewSet)
-router.register('products', ProductViewSet)
+router.register('products', ProductViewSet, basename='products')
+router.register('product-details', ProductDetailsViewSet, basename='product-details')
 router.register('orders', OrderViewSet)
 router.register('order-items', OrderItemViewSet)
 router.register('cart', CartViewSet)
@@ -35,6 +35,5 @@ router.register('subscriptions', SubscriptionViewSet)
 router.register('refunds', RefundViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
-    path('api/products/<slug>/', ProductDetailView.as_view(), name='product-detail'),
+    path('api/', include(router.urls)),    
 ]
